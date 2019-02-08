@@ -32,3 +32,13 @@ function price_format ($number) {
 	$number .= ' <b class="rub">р</b>';
 	return $number;
 }
+
+//функция показа оставшегося времени
+
+function time_rest($time) {
+	$time_now = date_create("now");
+	$time_compare = date_create($time);
+	$diff = date_diff($time_compare, $time_now);
+	$time_count = date_interval_format($diff, "%d:%H:%I");
+	return $time_count;
+}

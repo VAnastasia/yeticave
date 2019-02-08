@@ -30,7 +30,7 @@
 							<span class="lot__cost"><?=price_format($value['price_lot']); ?></span>
 						</div>
 						<div class="lot__timer timer">
-							12:23
+							<?=time_rest("tomorrow");?>
 						</div>
 					</div>
 				</div>
