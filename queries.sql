@@ -32,6 +32,7 @@ INSERT INTO `rates` (`id`, `date_add`, `amount`, `user_id`, `lot_id`) VALUES (NU
 
 INSERT INTO `rates` (`id`, `date_add`, `amount`, `user_id`, `lot_id`) VALUES (NULL, CURRENT_TIMESTAMP, '12500', '2', '1');
 
+
 # получить все категории;
 SELECT name FROM categories;
 
