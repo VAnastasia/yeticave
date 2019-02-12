@@ -27,3 +27,24 @@ VALUES (NULL, CURRENT_TIMESTAMP, 'Куртка для сноуборда DC Muti
 
 INSERT INTO `lots` (`id`, `date_create`, `title`, `description`, `image`, `start_price`, `date_finish`, `step`, `author_id`, `win_id`, `category_id`)
 VALUES (NULL, CURRENT_TIMESTAMP, 'Маска Oakley Canopy', NULL, 'img/lot-6.jpg', '5400', '2019-02-16 00:00:00', '100', '1', NULL, '6');
+
+INSERT INTO `rates` (`id`, `date_add`, `amount`, `user_id`, `lot_id`) VALUES (NULL, CURRENT_TIMESTAMP, '12000', '1', '1');
+
+INSERT INTO `rates` (`id`, `date_add`, `amount`, `user_id`, `lot_id`) VALUES (NULL, CURRENT_TIMESTAMP, '12500', '2', '1');
+
+# получить все категории;
+SELECT name FROM categories;
+
+# получить самые новые, открытые лоты. Каждый лот должен включать название, стартовую цену, ссылку на изображение, цену, название категории;
+SELECT date_create, title, image, start_price, categories.name
+FROM lots JOIN categories ON categories.id = lots.category_id;
+
+# показать лот по его id. Получите также название категории, к которой принадлежит лот;
+SELECT title, image, start_price, categories.name
+FROM lots JOIN categories ON categories.id = lots.category_id WHERE lots.id = 2;
+
+# обновить название лота по его идентификатору;
+UPDATE lots SET title = '2014 Rossignol District Snowboard' WHERE id = 1;
+
+# получить список самых свежих ставок для лота по его идентификатору;
+SELECT * FROM rates WHERE lot_id = 1 ORDER BY date_add DESC;
