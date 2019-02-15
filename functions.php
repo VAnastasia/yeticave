@@ -42,3 +42,22 @@ function time_rest($time) {
 	$time_count = date_interval_format($diff, "%d:%H:%I");
 	return $time_count;
 }
+
+//функция для получения массива из БД
+function fetch_data ($connect, $sql) {
+	if(!$connect) {
+		print('Ошибка подключения: ' . mysqli_connect_error());
+		exit();
+	}
+	$result = mysqli_query($connect, $sql);
+
+	if(!$result) {
+		$error = mysqli_error($connect);
+
+		print("Ошибка MySQL: " . $error);
+		exit();
+	}
+
+	$data = mysqli_fetch_all($result, MYSQLI_ASSOC);
+	return $data;
+}
