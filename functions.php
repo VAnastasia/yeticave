@@ -55,7 +55,6 @@ function fetch_data ($connect, $sql) {
 		$error = mysqli_error($connect);
 
 		print("Ошибка MySQL: " . $error);
-		exit();
 	}
 
 	$data = mysqli_fetch_all($result, MYSQLI_ASSOC);

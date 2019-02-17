@@ -28,9 +28,9 @@ VALUES (NULL, CURRENT_TIMESTAMP, 'Куртка для сноуборда DC Muti
 INSERT INTO `lots` (`id`, `date_create`, `title`, `description`, `image`, `start_price`, `date_finish`, `step`, `author_id`, `win_id`, `category_id`)
 VALUES (NULL, CURRENT_TIMESTAMP, 'Маска Oakley Canopy', NULL, 'img/lot-6.jpg', '5400', '2019-02-16 00:00:00', '100', '1', NULL, '6');
 
-INSERT INTO `rates` (`id`, `date_add`, `amount`, `user_id`, `lot_id`) VALUES (NULL, CURRENT_TIMESTAMP, '12000', '1', '1');
+INSERT INTO `rates` (`id`, `date_add`, `amount`, `user_id`, `lot_id`) VALUES (NULL, CURRENT_TIMESTAMP, '100', '1', '1');
 
-INSERT INTO `rates` (`id`, `date_add`, `amount`, `user_id`, `lot_id`) VALUES (NULL, CURRENT_TIMESTAMP, '12500', '2', '1');
+INSERT INTO `rates` (`id`, `date_add`, `amount`, `user_id`, `lot_id`) VALUES (NULL, CURRENT_TIMESTAMP, '200', '2', '1');
 
 
 # получить все категории;
