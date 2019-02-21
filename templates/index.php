@@ -18,6 +18,7 @@
 	<ul class="lots__list">
 		<!--заполните этот список из массива с товарами-->
 		<?php foreach($lots_array as $key => $value):?>
+		<?php if (strtotime($value['date_finish']) > strtotime("today")) : ?>
 			<li class="lots__item lot">
 				<div class="lot__image">
 					<img src="<?=$value['image'];?>" width="350" height="260" alt="">
@@ -30,12 +31,13 @@
 							<span class="lot__amount">Стартовая цена</span>
 							<span class="lot__cost"><?=price_format($value['start_price']); ?></span>
 						</div>
-						<div class="lot__timer timer">
-							<?=time_rest("tomorrow");?>
+						<div class="lot__timer timer <?=(strtotime($value['date_finish']) < strtotime("+24 hours now")) ? "timer--finishing" : "" ;?>">
+							<?=time_rest($value['date_finish']);?>
 						</div>
 					</div>
 				</div>
 			</li>
+		<?php endif; ?>
 		<?php endforeach; ?>
 	</ul>
 </section>

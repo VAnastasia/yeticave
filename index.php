@@ -14,7 +14,7 @@ $user = fetch_data($connect, $sql);
 $sql = "SELECT * FROM categories";
 $categories_array = fetch_data($connect, $sql);
 
-$sql = "SELECT lots.id, date_create, title, image, start_price, date_finish, name FROM lots JOIN categories ON lots.category_id = categories.id ORDER BY lots.date_create ASC";
+$sql = "SELECT lots.id, date_create, title, image, start_price, date_finish, name FROM lots JOIN categories ON lots.category_id = categories.id ORDER BY lots.date_create DESC";
 $lots_array = fetch_data($connect, $sql);
 
 $page_error = include_template('404.php', [
