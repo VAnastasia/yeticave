@@ -104,3 +104,26 @@ function db_get_prepare_stmt($link, $sql, $data = []) {
 
 	return $stmt;
 }
+
+/**
+ * проверяет корректность даты и соответствие формату "ДД.ММ.ГГГГ"
+ *
+ * @param $date string дата
+ *
+ * @return bool|int
+ */
+function correct_format_day ($date) {
+	$array = explode(".", $date);
+	if (count($array) == 3) {
+		$day = $array[0];
+		$month = $array[1];
+		$year = $array[2];
+		if (strlen($day) == 2 && strlen($month) == 2 && strlen($year) == 4) {
+			$correct = checkdate($month, $day, $year);
+		}
+	} else {
+		$correct = 0;
+	}
+	return $correct;
+}
+

@@ -1,27 +1,8 @@
 <?php
 
+require_once('init.php');
 require_once('functions.php');
-
-$user_id = 2;
-$safe_id = intval($user_id);
-
-//$connect = mysqli_connect("localhost", "root", "", "yeticave");
-
-$connect = mysqli_init();
-mysqli_options($connect, MYSQLI_OPT_INT_AND_FLOAT_NATIVE, 1);
-mysqli_real_connect($connect, "localhost", "root", "", "yeticave");
-
-
-mysqli_set_charset($connect, "utf8");
-
-$sql = "SELECT * FROM users WHERE id = " . $safe_id;
-$user = fetch_data($connect, $sql);
-
-$sql = "SELECT * FROM categories";
-$categories_array = fetch_data($connect, $sql);
-
-$sql = "SELECT lots.id, date_create, title, image, start_price, date_finish, name FROM lots JOIN categories ON lots.category_id = categories.id ORDER BY lots.date_create ASC";
-$lots_array = fetch_data($connect, $sql);
+require_once('data.php');
 
 $page_content = include_template('add.php', [
 	'lots_array' => $lots_array,
@@ -101,8 +82,6 @@ if ($_SERVER['REQUEST_METHOD'] == 'POST') {
 
 		$last_id = mysqli_insert_id($connect);
 
-		//print('Последний id: ' . $last_id);
-
 		if ($res) {
 			header("Location: /lot.php?lot_id=" . $last_id);
 		}
@@ -125,7 +104,7 @@ $layout_content = include_template('layout.php', [
 	'is_auth' => $is_auth,
 	'content' => $page_content,
 	'categories_array' => $categories_array,
-	'title' => 'Главная',
+	'title' => 'Добавление лота',
 	'user_name' => $user[0]['name']
 ]);
 

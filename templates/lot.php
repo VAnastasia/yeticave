@@ -13,7 +13,7 @@
 	<div class="lot-item__content">
 		<div class="lot-item__left">
 			<div class="lot-item__image">
-				<img src="../<?=$lots_array['image'];?>" width="730" height="548" alt="Сноуборд">
+				<img src="<?=$lots_array['image'];?>" width="730" height="548" alt="<?=$lots_array['title'];?>">
 			</div>
 			<p class="lot-item__category">Категория: <span><?=$lots_array['name'];?></span></p>
 			<p class="lot-item__description"><?=$lots_array['description'];?></p>
@@ -21,7 +21,7 @@
 		<div class="lot-item__right">
 			<div class="lot-item__state">
 				<div class="lot-item__timer timer">
-					<?=time_rest("tomorrow");?>
+					<?=time_rest($lots_array['date_finish']);?>
 				</div>
 				<div class="lot-item__cost-state">
 					<div class="lot-item__rate">
