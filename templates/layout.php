@@ -19,15 +19,22 @@
 				<input type="search" name="search" placeholder="Поиск лота">
 				<input class="main-header__search-btn" type="submit" name="find" value="Найти">
 			</form>
-			<a class="main-header__add-lot button" href="add.php">Добавить лот</a>
+			<a class="main-header__add-lot button" href="<?=($user_name ? "add.php" : "#");?>">Добавить лот</a>
 
 			<nav class="user-menu">
 
 				<!-- здесь должен быть PHP код для показа имени пользователя -->
-				<?php if ($is_auth): ?>
-					<div class="user-menu__logged">
-						<p> <?=$user_name; ?> </p>
-					</div>
+				<?php if ($user_name): ?>
+                    <ul class="user-menu__list">
+                        <li class="user-menu__item">
+                            <div class="user-menu__logged">
+                                <p> <?=$user_name; ?> </p>
+                            </div>
+                        </li>
+                        <li class="user-menu__item">
+                            <a href="logout.php">Выход</a>
+                        </li>
+                    </ul>
 				<?php else: ?>
 					<ul class="user-menu__list">
 						<li class="user-menu__item">

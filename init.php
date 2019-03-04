@@ -1,6 +1,10 @@
 <?php
 
-$user_id = 2;
+require_once('functions.php');
+
+session_start();
+
+$user_id = $_SESSION['user']['id'] ?? null;
 $safe_id = intval($user_id);
 
 $connect = mysqli_init();

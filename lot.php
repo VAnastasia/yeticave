@@ -17,10 +17,27 @@ if(isset($_GET['lot_id'])) {
 	} else {
 		$page_content = include_template('lot.php', [
 			'categories_array' => $categories_array,
-			'lots_array' => $lots_array[0]
+			'lots_array' => $lots_array[0],
+            'user_name' => $user[0]['name']
 		]);
 	}
 }
+
+if (empty($_SESSION)) {
+    $page_content = include_template('lot.php', [
+        'categories_array' => $categories_array,
+        'lots_array' => $lots_array[0],
+        'user_name' => ""
+    ]);
+
+    $layout_content = include_template('layout.php', [
+        'is_auth' => "",
+        'content' => $page_content,
+        'categories_array' => $categories_array,
+        'title' => 'Просмотр лота',
+        'user_name' => ""
+    ]);
+} else {
 
 $layout_content = include_template('layout.php', [
 	'is_auth' => $is_auth,
@@ -29,5 +46,7 @@ $layout_content = include_template('layout.php', [
 	'title' => 'Просмотр лота',
 	'user_name' => $user[0]['name']
 ]);
+
+}
 
 print($layout_content);

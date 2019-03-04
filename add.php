@@ -4,6 +4,11 @@ require_once('init.php');
 require_once('functions.php');
 require_once('data.php');
 
+if (empty($_SESSION)) {
+    http_response_code(403);
+    exit();
+}
+
 $page_content = include_template('add.php', [
 	'lots_array' => $lots_array,
 	'categories_array' => $categories_array

@@ -18,6 +18,7 @@
 			<p class="lot-item__category">Категория: <span><?=$lots_array['name'];?></span></p>
 			<p class="lot-item__description"><?=$lots_array['description'];?></p>
 		</div>
+        <?php if ($user_name):?>
 		<div class="lot-item__right">
 			<div class="lot-item__state">
 				<div class="lot-item__timer timer">
@@ -97,6 +98,7 @@
 				</table>
 			</div>
 		</div>
+        <?php endif;?>
 	</div>
 </section>
 </main>

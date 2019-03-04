@@ -13,13 +13,24 @@ $page_content = include_template('index.php', [
 	'lots_array' => $lots_array
 ]);
 
-$layout_content = include_template('layout.php', [
-  'is_auth' => $is_auth,
-	'content' => $page_content,
-	'categories_array' => $categories_array,
-	'title' => 'Главная',
-	'user_name' => $user[0]['name']
-]);
+if (empty($_SESSION)) {
+    $layout_content = include_template('layout.php', [
+        'is_auth' => "",
+        'content' => $page_content,
+        'categories_array' => $categories_array,
+        'title' => 'Главная',
+        'user_name' => ""
+    ]);
+} else {
+    $layout_content = include_template('layout.php', [
+        'is_auth' => $is_auth,
+        'content' => $page_content,
+        'categories_array' => $categories_array,
+        'title' => 'Главная',
+        'user_name' => $user[0]['name']
+    ]);
+
+}
 
 print($layout_content);
 

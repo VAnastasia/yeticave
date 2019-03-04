@@ -50,16 +50,9 @@ if ($_SERVER['REQUEST_METHOD'] == 'POST') {
 		}
 	}
 
-
 	if (empty($form['file'])) {
 		unset($errors['file']);
 	}
-	/*
-		print('<pre>');
-		print_r($form);
-		print_r($errors);
-		print_r($_FILES);
-		print('</pre>');*/
 
 	if (empty($errors)) {
 		$email = mysqli_real_escape_string($connect, $form['email']);
@@ -103,7 +96,7 @@ $layout_content = include_template('layout.php', [
 	'content' => $page_content,
 	'categories_array' => $categories_array,
 	'title' => 'Регистрация',
-	'user_name' => $user[0]['name']
+	'user_name' => ""
 ]);
 
 print($layout_content);
