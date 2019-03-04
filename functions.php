@@ -127,3 +127,8 @@ function correct_format_day ($date) {
 	return $correct;
 }
 
+function current_price ($lot)
+{
+
+}
+
