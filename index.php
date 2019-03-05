@@ -15,7 +15,6 @@ $page_content = include_template('index.php', [
 
 if (empty($_SESSION)) {
     $layout_content = include_template('layout.php', [
-        'is_auth' => "",
         'content' => $page_content,
         'categories_array' => $categories_array,
         'title' => 'Главная',
@@ -23,7 +22,6 @@ if (empty($_SESSION)) {
     ]);
 } else {
     $layout_content = include_template('layout.php', [
-        'is_auth' => $is_auth,
         'content' => $page_content,
         'categories_array' => $categories_array,
         'title' => 'Главная',

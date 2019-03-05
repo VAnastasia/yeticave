@@ -17,10 +17,9 @@ function include_template($name, $data) {
 	return $result;
 };
 
-$is_auth = rand(0, 1);
-
 /**
  * функция форматирования цены
+ *
  * @param $number
  */
 
@@ -127,8 +126,4 @@ function correct_format_day ($date) {
 	return $correct;
 }
 
-function current_price ($lot)
-{
-
-}
 
