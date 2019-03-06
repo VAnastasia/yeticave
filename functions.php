@@ -112,12 +112,12 @@ function db_get_prepare_stmt($link, $sql, $data = []) {
  * @return bool|int
  */
 function correct_format_day ($date) {
-	$array = explode(".", $date);
+	$array = explode("-", $date);
 	if (count($array) == 3) {
-		$day = $array[0];
+		$day = $array[2];
 		$month = $array[1];
-		$year = $array[2];
-		if (strlen($day) == 2 && strlen($month) == 2 && strlen($year) == 4) {
+		$year = $array[0];
+		if (strlen($day) === 2 && strlen($month) === 2 && strlen($year) === 4) {
 			$correct = checkdate($month, $day, $year);
 		}
 	} else {

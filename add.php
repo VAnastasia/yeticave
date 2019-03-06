@@ -72,7 +72,9 @@ if ($_SERVER['REQUEST_METHOD'] == 'POST') {
 		$errors['lot-step'] = "Введите целое число больше нуля";
 	}
 
-	if (strtotime($lot['lot-date']) < strtotime('tomorrow')) {
+    if (!correct_format_day($lot['lot-date'])) {
+        $errors['lot-date'] = "Введите дату в формате ДД.ММ.ГГГГ";
+    } else if (strtotime($lot['lot-date']) < strtotime('tomorrow')) {
 		$errors['lot-date'] = "Введите дату больше текущей";
 	}
 

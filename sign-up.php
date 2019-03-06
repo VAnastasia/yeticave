@@ -92,7 +92,6 @@ if ($_SERVER['REQUEST_METHOD'] == 'POST') {
 }
 
 $layout_content = include_template('layout.php', [
-	'is_auth' => $is_auth,
 	'content' => $page_content,
 	'categories_array' => $categories_array,
 	'title' => 'Регистрация',
