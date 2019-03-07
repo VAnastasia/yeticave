@@ -15,20 +15,6 @@ if(isset($_GET['lot_id'])) {
 
     $price = $current_price[0]['amount'] ?? $lots_array[0]['start_price'];
 
-    $sql = "SELECT lot_id, name, amount, date_add, rates.user_id FROM rates JOIN users ON rates.user_id = users.id WHERE rates.lot_id = " . $lot_id . " ORDER BY date_add DESC";
-    $history = fetch_data($connect, $sql);
-    $res = mysqli_query($connect, $sql);
-    $count_rates = mysqli_num_rows($res);
-
-    $sql = "SELECT lot_id, date_add, user_id FROM rates WHERE lot_id = " . $lot_id . " ORDER BY date_add DESC LIMIT 1";
-    $last_rate = fetch_data($connect, $sql);
-
-    if ($last_rate) {
-        $rate_done = $last_rate[0]['user_id'] === $user[0]['id'] ? 0 : 1;
-    } else {
-        $rate_done = 1;
-    }
-
     if(empty($lots_array)) {
 		$page_content = include_template('404.php', [
 			'categories_array' => $categories_array
@@ -98,6 +84,20 @@ if(isset($_GET['lot_id'])) {
         ]);
 
     } else if (!empty($_SESSION)) {
+        $sql = "SELECT lot_id, name, amount, date_add, rates.user_id FROM rates JOIN users ON rates.user_id = users.id WHERE rates.lot_id = " . $lot_id . " ORDER BY date_add DESC";
+        $history = fetch_data($connect, $sql);
+        $res = mysqli_query($connect, $sql);
+        $count_rates = mysqli_num_rows($res);
+
+        $sql = "SELECT lot_id, date_add, user_id FROM rates WHERE lot_id = " . $lot_id . " ORDER BY date_add DESC LIMIT 1";
+        $last_rate = fetch_data($connect, $sql);
+
+        if ($last_rate) {
+            $rate_done = $last_rate[0]['user_id'] === $user[0]['id'] ? 0 : 1;
+        } else {
+            $rate_done = 1;
+        }
+
         $page_content = include_template('lot.php', [
             'rate_done' => $rate_done,
             'count_rates' => $count_rates,

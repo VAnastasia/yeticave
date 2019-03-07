@@ -27,9 +27,12 @@
 				<?php if ($user_name): ?>
                     <ul class="user-menu__list">
                         <li class="user-menu__item">
-                            <div class="user-menu__logged">
-                                <p> <?=$user_name; ?> </p>
-                            </div>
+                            <a href="my-lots.php" class="user-menu__logged">
+                                <p><?=$user_name; ?></p>
+                            </a>
+                        </li>
+                        <li class="user-menu__item">
+
                         </li>
                         <li class="user-menu__item">
                             <a href="logout.php">Выход</a>
