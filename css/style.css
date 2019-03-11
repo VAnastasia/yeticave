@@ -612,6 +612,7 @@ main.container {
 .lot__image img {
   width: 100%;
   height: 100%;
+  object-fit: cover;
 }
 
 .lot__info {
@@ -989,6 +990,7 @@ input:invalid .form__error{
   left: 50%;
   top: 50%;
   display: block;
+  object-fit: cover;
   -webkit-transform: translate(-50%, -50%);
   -ms-transform: translate(-50%, -50%);
   transform: translate(-50%, -50%);
@@ -1199,6 +1201,7 @@ input:invalid .form__error{
 .rates__img img {
   width: 100%;
   height: 100%;
+  object-fit: cover;
 }
 
 .rates__title {

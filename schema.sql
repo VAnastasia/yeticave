@@ -84,3 +84,6 @@ ALTER TABLE `rates` ADD FOREIGN KEY (`lot_id`) REFERENCES `lots`(`id`) ON DELETE
 
 ALTER TABLE `rates` ADD FOREIGN KEY (`user_id`) REFERENCES `users`(`id`) ON DELETE RESTRICT ON UPDATE RESTRICT;
 
+ALTER TABLE `yeticave`.`lots` DROP INDEX `description`, ADD FULLTEXT `description` (`description`);
+ALTER TABLE `yeticave`.`lots` DROP INDEX `title`, ADD FULLTEXT `title` (`title`);
+ALTER TABLE `yeticave`.`lots` DROP INDEX `search`, ADD FULLTEXT `search` (`title`, `description`);

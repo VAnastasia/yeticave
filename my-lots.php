@@ -55,13 +55,19 @@ print('<pre>');
 print_r($lots);
 print('</pre>');*/
 
+$navigation = include_template('navigation.php', [
+    'categories_array' => $categories_array,
+]);
+
 $page_content = include_template('my-lots.php', [
+    'navigation' => $navigation,
     'lots' => $lots,
     'categories_array' => $categories_array,
     'lots_array' => $lots_array
 ]);
 
 $layout_content = include_template('layout.php', [
+    'navigation' => $navigation,
     'content' => $page_content,
     'categories_array' => $categories_array,
     'title' => 'Мои лоты',

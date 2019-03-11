@@ -4,6 +4,10 @@ require_once('init.php');
 require_once('functions.php');
 require_once('data.php');
 
+$navigation = include_template('navigation.php', [
+    'categories_array' => $categories_array,
+]);
+
 if ($_SERVER['REQUEST_METHOD'] === 'POST') {
     $form = $_POST;
 
@@ -49,7 +53,7 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
 
     if (count($errors)) {
         $page_content = include_template('login.php', [
-            'categories_array' => $categories_array,
+            'navigation' => $navigation,
             'lots_array' => $lots_array,
             'errors' => $errors,
             'form' => $form
@@ -58,14 +62,14 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
 
 } else {
     $page_content = include_template('login.php', [
-        'categories_array' => $categories_array,
+        'navigation' => $navigation,
         'lots_array' => $lots_array
     ]);
 }
 
 $layout_content = include_template('layout.php', [
 	'content' => $page_content,
-	'categories_array' => $categories_array,
+    'navigation' => $navigation,
 	'title' => 'Вход',
 	'user_name' => ""
 ]);

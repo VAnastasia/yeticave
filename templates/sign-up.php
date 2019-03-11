@@ -1,12 +1,6 @@
 <main>
 	<nav class="nav">
-		<ul class="nav__list container">
-			<?php foreach ($categories_array as $key => $value): ?>
-				<li class="nav__item">
-					<a href="pages/all-lots.html"><?=$value['name']; ?></a>
-				</li>
-			<?php endforeach; ?>
-		</ul>
+        <?= $navigation ;?>
 	</nav>
 	<form class="form container <?=(!empty($errors) ? "form--invalid" : "");?>" action="sign-up.php" method="post" enctype="multipart/form-data">
 		<h2>Регистрация нового аккаунта</h2>

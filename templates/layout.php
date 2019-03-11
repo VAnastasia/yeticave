@@ -15,7 +15,7 @@
 			<a class="main-header__logo" href="index.php">
 				<img src="img/logo.svg" width="160" height="39" alt="Логотип компании YetiCave">
 			</a>
-			<form class="main-header__search" method="get" action="https://echo.htmlacademy.ru">
+			<form class="main-header__search" method="get" action="search.php" enctype="application/x-www-form-urlencoded">
 				<input type="search" name="search" placeholder="Поиск лота">
 				<input class="main-header__search-btn" type="submit" name="find" value="Найти">
 			</form>
@@ -58,14 +58,7 @@
 
 <footer class="main-footer">
 	<nav class="nav">
-		<ul class="nav__list container">
-			<!--заполните этот список из массива категорий-->
-			<?php foreach ($categories_array as $key => $value): ?>
-				<li class="nav__item">
-					<a href="pages/all-lots.html"><?=$value['name']; ?></a>
-				</li>
-			<?php endforeach; ?>
-		</ul>
+        <?= $navigation ;?>
 	</nav>
 	<div class="main-footer__bottom container">
 		<div class="main-footer__copyright">
