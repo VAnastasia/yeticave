@@ -22,8 +22,6 @@
 			<a class="main-header__add-lot button" href="<?=($user_name ? "add.php" : "#");?>">Добавить лот</a>
 
 			<nav class="user-menu">
-
-				<!-- здесь должен быть PHP код для показа имени пользователя -->
 				<?php if ($user_name): ?>
                     <ul class="user-menu__list">
                         <li class="user-menu__item">

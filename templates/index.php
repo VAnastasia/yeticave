@@ -4,30 +4,8 @@
 	<p class="promo__text">На нашем интернет-аукционе ты найдёшь самое эксклюзивное сноубордическое и горнолыжное снаряжение.</p>
 	<ul class="promo__list">
 		<?php foreach ($categories_array as $key => $value): ?>
-            <?php switch ($value['name']) {
-                case "Доски и лыжи":
-                    $category_image = "promo__item--boards";
-                    break;
-                case "Крепления":
-                    $category_image = "promo__item--attachment";
-                    break;
-                case "Ботинки":
-                    $category_image = "promo__item--boots";
-                    break;
-                case "Одежда":
-                    $category_image = "promo__item--clothing";
-                    break;
-                case "Инструменты":
-                    $category_image = "promo__item--tools";
-                    break;
-                case "Разное":
-                    $category_image = "promo__item--other";
-                    break;
-                default:
-                    $category_image = "";
-            } ?>
-			<li class="promo__item <?= $category_image;?>">
-				<a class="promo__link" href="index.php?category_id=<?=$value['id'];?>"><?=$value['name']; ?></a>
+			<li class="promo__item promo__item--<?=$value['icon'];?>">
+				<a class="promo__link" href="all-lots.php?category_id=<?=$value['id'];?>"><?=$value['name']; ?></a>
 			</li>
 		<?php endforeach; ?>
     </ul>

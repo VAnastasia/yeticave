@@ -87,3 +87,10 @@ ALTER TABLE `rates` ADD FOREIGN KEY (`user_id`) REFERENCES `users`(`id`) ON DELE
 ALTER TABLE `yeticave`.`lots` DROP INDEX `description`, ADD FULLTEXT `description` (`description`);
 ALTER TABLE `yeticave`.`lots` DROP INDEX `title`, ADD FULLTEXT `title` (`title`);
 ALTER TABLE `yeticave`.`lots` DROP INDEX `search`, ADD FULLTEXT `search` (`title`, `description`);
+ALTER TABLE `categories` ADD `icon` VARCHAR(255) CHARACTER SET utf8 COLLATE utf8_general_ci NOT NULL AFTER `name`;
+UPDATE `categories` SET `icon` = 'boards' WHERE `categories`.`id` = 1;
+UPDATE `categories` SET `icon` = 'attachment' WHERE `categories`.`id` = 2;
+UPDATE `categories` SET `icon` = 'boots' WHERE `categories`.`id` = 3;
+UPDATE `categories` SET `icon` = 'clothing' WHERE `categories`.`id` = 4;
+UPDATE `categories` SET `icon` = 'tools' WHERE `categories`.`id` = 5;
+UPDATE `categories` SET `icon` = 'other' WHERE `categories`.`id` = 6;
