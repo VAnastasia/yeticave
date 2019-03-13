@@ -2,17 +2,17 @@
 	<nav class="nav">
         <?= $navigation ;?>
 	</nav>
-	<form class="form form--add-lot container <?=(count($errors) ? "form--invalid" : ""); ?>" action="add.php" method="post" enctype="multipart/form-data"> <!-- form--invalid -->
+	<form class="form form--add-lot container <?=(count($errors) ? "form--invalid" : ""); ?>" action="add.php" method="post" enctype="multipart/form-data">
 		<h2>Добавление лота</h2>
 		<div class="form__container-two">
-			<div class="form__item <?=($errors['lot-name'] ? "form__item--invalid" : "");?>"> <!-- form__item--invalid -->
+			<div class="form__item <?=($errors['lot-name'] ? "form__item--invalid" : "");?>">
 				<label for="lot-name">Наименование</label>
 				<input id="lot-name" type="text" name="lot-name" placeholder="Введите наименование лота" value="<?=$_POST['lot-name'] ?? "";?>"> <!--required-->
 				<span class="form__error"><?=$errors['lot-name'];?></span>
 			</div>
 			<div class="form__item <?=(isset($errors['category']) ? "form__item--invalid" : "");?>">
 				<label for="category">Категория</label>
-				<select id="category" name="category"> <!--required-->
+				<select id="category" name="category">
 					<option>Выберите категорию</option>
 					<?php foreach ($categories_array as $key => $value): ?>
 						<option <?=(isset($_POST['category']) && $value['name'] == $_POST['category'] ? "selected" : "");?>><?=$value['name'];?></option>
@@ -26,12 +26,12 @@
 			<textarea id="message" name="message" placeholder="Напишите описание лота"><?=$_POST['message'] ?? "";?></textarea>
 			<span class="form__error"><?=$errors['message'] ?? "";?></span>
 		</div>
-		<div class="form__item form__item--file <?=(isset($errors['file']) ? "form__item--uploaded" : "");?>"> <!-- form__item--uploaded -->
+		<div class="form__item form__item--file <?=(isset($errors['file']) ? "" : "form__item--uploaded");?>">
 			<label>Изображение</label>
 			<div class="preview">
 				<button class="preview__remove" type="button">x</button>
 				<div class="preview__img">
-					<img src="img/<?=$lot['file'];?>" width="113" height="113" alt="Изображение лота">
+					<img src="img/<?=$_FILES['file']['name'];?>" width="113" height="113" alt="Изображение лота">
 				</div>
 			</div>
 			<div class="form__input-file">

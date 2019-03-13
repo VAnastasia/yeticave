@@ -68,7 +68,8 @@ $layout_content = include_template('layout.php', [
     'content' => $page_content,
     'categories_array' => $categories_array,
     'title' => 'Мои лоты',
-    'user_name' => $user[0]['name']
+    'user_name' => $user[0]['name'],
+    'avatar' => $user[0]['avatar']
 ]);
 
 print($layout_content);

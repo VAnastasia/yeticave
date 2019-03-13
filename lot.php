@@ -84,7 +84,8 @@ if(isset($_GET['lot_id'])) {
             'content' => $page_content,
             'navigation' => $navigation,
             'title' => 'Просмотр лота',
-            'user_name' => $user[0]['name']
+            'user_name' => $user[0]['name'],
+            'avatar' => $user[0]['avatar']
         ]);
 	}
 

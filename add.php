@@ -109,7 +109,7 @@ if ($_SERVER['REQUEST_METHOD'] == 'POST') {
             'categories_array' => $categories_array,
 			'lot' => $lot,
 			'errors' => $errors,
-            'navigation' => $navigation,
+            'navigation' => $navigation
 		]);
 	}
 }
@@ -118,7 +118,8 @@ $layout_content = include_template('layout.php', [
 	'content' => $page_content,
     'navigation' => $navigation,
 	'title' => 'Добавление лота',
-	'user_name' => $user[0]['name']
+	'user_name' => $user[0]['name'],
+    'avatar' => $user[0]['avatar']
 ]);
 
 print($layout_content);

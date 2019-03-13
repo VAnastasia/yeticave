@@ -38,7 +38,8 @@ if (empty($_SESSION)) {
         'navigation' => $navigation,
         'content' => $page_content,
         'title' => 'Поиск',
-        'user_name' => $user[0]['name']
+        'user_name' => $user[0]['name'],
+        'avatar' => $user[0]['avatar']
     ]);
 
 }

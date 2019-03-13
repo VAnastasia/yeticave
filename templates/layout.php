@@ -25,12 +25,14 @@
 				<?php if ($user_name): ?>
                     <ul class="user-menu__list">
                         <li class="user-menu__item">
-                            <a href="my-lots.php" class="user-menu__logged">
-                                <p><?=$user_name; ?></p>
-                            </a>
+                            <div class="user-menu__image">
+                                <img src="<?= ($avatar ? $avatar : "img/user.png") ;?>" width="40" height="40" alt="Пользователь">
+                            </div>
                         </li>
                         <li class="user-menu__item">
-
+                            <a href="my-lots.php" class="user-menu__logged">
+                                <?=$user_name; ?>
+                            </a>
                         </li>
                         <li class="user-menu__item">
                             <a href="logout.php">Выход</a>
