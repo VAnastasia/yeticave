@@ -5,7 +5,7 @@ require_once('init.php');
 require_once('functions.php');
 require_once('data.php');
 
-$sql = "SELECT DISTINCT lots.id, lots.title, lots.image FROM lots JOIN rates ON lots.id = rates.lot_id WHERE rates.user_id = " . $safe_id . " AND DAY(date_finish) = DAY(NOW())";
+$sql = "SELECT DISTINCT lots.id, lots.title, lots.image FROM lots JOIN rates ON lots.id = rates.lot_id WHERE rates.user_id = " . $safe_id . " AND DAY(date_finish) = DAY(NOW()) AND lots.win_id IS NULL";
 $my_lots = fetch_data($connect, $sql);
 
 $lots = [];
@@ -56,9 +56,6 @@ foreach ($my_lots as $my_lot) {
         $transport->setPassword("htmlacademy");
 
         $mailer = new Swift_Mailer($transport);
-
-        $logger = new Swift_Plugins_Loggers_ArrayLogger();
-        $mailer->registerPlugin(new Swift_Plugins_LoggerPlugin($logger));
 
         $msg_content = include_template('email.php', ['lot' => $lot, 'user' => $user[0]]);
 
