@@ -1,0 +1,13 @@
+{
+    "name": "user/yeticave",
+    "type": "project",
+    "authors": [
+        {
+            "name": "Anastasiya",
+            "email": "v.anastasiya26@mail.ru"
+        }
+    ],
+    "require": {
+        "swiftmailer/swiftmailer": "^6.2"
+    }
+}

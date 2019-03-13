@@ -1,15 +1,11 @@
 <?php
 
+require_once 'vendor/autoload.php';
 require_once('init.php');
 require_once('functions.php');
 require_once('data.php');
 
-if (empty($_SESSION)) {
-    http_response_code(403);
-    exit();
-}
-
-$sql = "SELECT DISTINCT lots.id, lots.title, lots.image FROM lots JOIN rates ON lots.id = rates.lot_id WHERE rates.user_id = " . $safe_id;
+$sql = "SELECT DISTINCT lots.id, lots.title, lots.image FROM lots JOIN rates ON lots.id = rates.lot_id WHERE rates.user_id = " . $safe_id . " AND DAY(date_finish) = DAY(NOW())";
 $my_lots = fetch_data($connect, $sql);
 
 $lots = [];
@@ -38,37 +34,40 @@ foreach ($my_lots as $my_lot) {
     $lot['date_finish'] = $lot_category[0]['date_finish'];
     $lot['category'] = $lot_category[0]['name'];
     $lot['contacts'] = $lot_contacts[0]['contact'];
+    $lot['winner'] = $last_rate[0]['user_id'];
     if ((strtotime($lot['date_finish']) < strtotime('now')) && ($lot['last_rate'] !== $safe_id)) {
         $lot['rate_state'] = "rates__item--end";
         $lot['timer'] = "timer--end";
     } else if ((strtotime($lot['date_finish']) < strtotime('now')) && ($lot['last_rate'] === $safe_id)) {
         $lot['rate_state'] = "rates__item--win";
         $lot['timer'] = "timer--win";
-        $lot['winner'] = $safe_id;
     } else {
         $lot['rate_state'] = "";
         $lot['timer'] = "";
     }
-    $lots[] = $lot;
+
+    if ($lot['winner'] === $safe_id) {
+        $sql = 'UPDATE lots SET win_id = (?) WHERE id = ' . $lot['id'];
+        $stmt = db_get_prepare_stmt($connect, $sql, [$lot['winner']]);
+        $res = mysqli_stmt_execute($stmt);
+
+        $transport = new Swift_SmtpTransport("phpdemo.ru", 25);
+        $transport->setUsername("keks@phpdemo.ru");
+        $transport->setPassword("htmlacademy");
+
+        $mailer = new Swift_Mailer($transport);
+
+        $logger = new Swift_Plugins_Loggers_ArrayLogger();
+        $mailer->registerPlugin(new Swift_Plugins_LoggerPlugin($logger));
+
+        $msg_content = include_template('email.php', ['lot' => $lot, 'user' => $user[0]]);
+
+        $message = new Swift_Message();
+        $message->setSubject("Ваша ставка победила");
+        $message->setTo([$user[0]['email'] => $user[0]['name']]);
+        $message->setBody($msg_content, 'text/html');
+        $message->setFrom('keks@phpdemo.ru', 'Yeticave');
+        $result = $mailer->send($message);
+
+    }
 }
-
-$navigation = include_template('navigation.php', [
-    'categories_array' => $categories_array,
-]);
-
-$page_content = include_template('my-lots.php', [
-    'navigation' => $navigation,
-    'lots' => $lots,
-    'categories_array' => $categories_array,
-    'lots_array' => $lots_array
-]);
-
-$layout_content = include_template('layout.php', [
-    'navigation' => $navigation,
-    'content' => $page_content,
-    'categories_array' => $categories_array,
-    'title' => 'Мои лоты',
-    'user_name' => $user[0]['name']
-]);
-
-print($layout_content);
