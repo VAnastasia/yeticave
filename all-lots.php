@@ -29,9 +29,37 @@ if (isset($_GET['category_id'])) {
     $page_content = include_template('all-lots.php', [
         'navigation' => $navigation,
         'categories_array' => $categories_array,
-        'lots_array' => $lots_array
+        'lots_array' => $lots_array,
+        'pages' => "",
+        'cur_page' => 0
+
     ]);
 
+    if (!empty($lots_array)) {
+        $cur_page = $_GET['page'] ?? 1;
+        $page_items = 3;
+
+        $result = mysqli_query($connect, "SELECT COUNT(*) as cnt FROM lots WHERE category_id = " . $category_id);
+        $items_count = mysqli_fetch_assoc($result)['cnt'];
+
+        $pages_count = ceil($items_count / $page_items);
+        $offset = ($cur_page - 1) * $page_items;
+
+        $pages = range(1, $pages_count);
+
+        $sql = "SELECT lots.id, date_create, title, image, start_price, date_finish, name FROM lots JOIN categories ON lots.category_id = categories.id WHERE categories.id = " . $category_id . " ORDER BY lots.date_create DESC LIMIT " . $page_items . " OFFSET " . $offset;
+        $lots_array = fetch_data($connect, $sql);
+
+        $page_content = include_template('all-lots.php', [
+            'navigation' => $navigation,
+            'categories_array' => $categories_array,
+            'lots_array' => $lots_array,
+            'pages' => $pages,
+            'cur_page' => $cur_page
+
+        ]);
+
+    }
 
     if (empty($categories_array)) {
         $page_content = $page_error;
